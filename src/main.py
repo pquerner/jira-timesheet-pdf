@@ -59,7 +59,10 @@ def get_worklog(assignee):
 
     jira = JIRA('https://{0}'.format(server),
                 basic_auth=(username, password))
-    jql = 'timespent > 0 AND project = %s ORDER BY updated DESC' % project 
+    #jql = 'timespent > 0 AND project = %s ORDER BY updated DESC' % project
+    #issues = jira.search_issues(jql)
+
+    jql = 'worklogAuthor = currentUser() AND worklogDate = %s' % from_date
     issues = jira.search_issues(jql)
         
     worklogs = []
